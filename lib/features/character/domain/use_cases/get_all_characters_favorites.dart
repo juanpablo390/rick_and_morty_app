@@ -1,10 +1,10 @@
 import 'package:rick_and_morty_app/features/character/domain/entities/character.dart';
 import 'package:rick_and_morty_app/features/character/domain/repositories/characters_repository.dart';
 
-class GetAllCharactersAvoritesUseCase {
-  final CharactersRepository repository;
+class GetAllCharactersFavoritesUseCase {
+  final CharacterRepository repository;
 
-  GetAllCharactersAvoritesUseCase({required this.repository});
+  GetAllCharactersFavoritesUseCase({required this.repository});
   Future<List<Character>> call() {
     return repository.getAllCharactersFavorites();
   }

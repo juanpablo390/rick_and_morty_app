@@ -16,16 +16,27 @@ dependencies:
   http: ^1.2.2
 
   cupertino_icons: ^1.0.8
+
+  # Manejador de estados
   mobx: ^2.4.0
+  flutter_mobx: ^2.2.1+1
+
+  # Base de datos local
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+
+  # Localizador de servicios
+  get_it: ^8.0.2
   
-
-
+  # Mapas
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  build_runner: ^2.4.13
+  mobx_codegen: ^2.6.2
 
   flutter_lints: ^4.0.0
 

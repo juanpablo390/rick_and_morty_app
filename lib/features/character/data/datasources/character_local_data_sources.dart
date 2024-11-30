@@ -5,6 +5,7 @@ import 'package:rick_and_morty_app/features/character/data/models/character_mode
 abstract class CharacterLocalDataSource {
   Future<bool> addToFavorite(CharacterModel characterModel);
   Future<List<CharacterModel>> getAllCharactersFavorites();
+  Future<bool> removeFavorite(CharacterModel characterModel);
 }
 
 class HiveCharacterLocalDataSourceImpl implements CharacterLocalDataSource {
@@ -22,6 +23,19 @@ class HiveCharacterLocalDataSourceImpl implements CharacterLocalDataSource {
     } catch (error) {
       debugPrint(error.toString());
       throw Exception('Error al agregar al favorito');
+    }
+  }
+
+  @override
+  Future<bool> removeFavorite(CharacterModel characterModel) async {
+    try {
+      Box<CharacterModel> box = await Hive.openBox('characters');
+      box.delete(characterModel);
+
+      return true;
+    } catch (error) {
+      debugPrint(error.toString());
+      throw Exception('Error al eliminar de favoritos');
     }
   }
 
