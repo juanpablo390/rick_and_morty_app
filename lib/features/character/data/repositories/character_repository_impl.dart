@@ -34,9 +34,9 @@ class CharacterRepositoryImpl implements CharacterRepository {
   }
 
   @override
-  Future<List<Character>> getCharacters() async {
+  Future<List<Character>> getCharacters(int page) async {
     try {
-      final List<CharacterModel> resp = await remoteDataSources.getCharacters();
+      final List<CharacterModel> resp = await remoteDataSources.getCharacters(page);
       return resp;
     } catch (error) {
       throw Exception('Error al traer los personaje (server data-repository)');

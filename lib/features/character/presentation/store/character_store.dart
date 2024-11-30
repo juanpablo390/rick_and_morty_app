@@ -31,13 +31,34 @@ abstract class _CharacterStoreBase with Store {
   @observable
   bool isLoading = false;
 
+  @observable
+  int currentPage = 1;
+
+  @observable
+  bool hasMorePages = true;
+
   @action
-  Future<void> fetchCharacters() async {
+  Future<void> fetchCharacters({bool reset = false}) async {
+    if (isLoading) return;
+
+    if (reset) {
+      currentPage = 1;
+      characters.clear();
+      hasMorePages = true;
+    }
+
+    if (!hasMorePages) return;
+
     isLoading = true;
     try {
-      final result = await getCharactersUseCase();
-      characters.clear();
-      characters.addAll(result);
+      final result = await getCharactersUseCase(currentPage);
+
+      if (result.isEmpty) {
+        hasMorePages = false;
+      } else {
+        characters.addAll(result);
+        currentPage++;
+      }
     } catch (e) {
       throw Exception('(store) Error al obtener los personajes: $e');
     } finally {

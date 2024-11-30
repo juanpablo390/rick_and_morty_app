@@ -57,12 +57,45 @@ mixin _$CharacterStore on _CharacterStoreBase, Store {
     });
   }
 
+  late final _$currentPageAtom =
+      Atom(name: '_CharacterStoreBase.currentPage', context: context);
+
+  @override
+  int get currentPage {
+    _$currentPageAtom.reportRead();
+    return super.currentPage;
+  }
+
+  @override
+  set currentPage(int value) {
+    _$currentPageAtom.reportWrite(value, super.currentPage, () {
+      super.currentPage = value;
+    });
+  }
+
+  late final _$hasMorePagesAtom =
+      Atom(name: '_CharacterStoreBase.hasMorePages', context: context);
+
+  @override
+  bool get hasMorePages {
+    _$hasMorePagesAtom.reportRead();
+    return super.hasMorePages;
+  }
+
+  @override
+  set hasMorePages(bool value) {
+    _$hasMorePagesAtom.reportWrite(value, super.hasMorePages, () {
+      super.hasMorePages = value;
+    });
+  }
+
   late final _$fetchCharactersAsyncAction =
       AsyncAction('_CharacterStoreBase.fetchCharacters', context: context);
 
   @override
-  Future<void> fetchCharacters() {
-    return _$fetchCharactersAsyncAction.run(() => super.fetchCharacters());
+  Future<void> fetchCharacters({bool reset = false}) {
+    return _$fetchCharactersAsyncAction
+        .run(() => super.fetchCharacters(reset: reset));
   }
 
   late final _$fetchFavoriteCharactersAsyncAction = AsyncAction(
@@ -98,7 +131,9 @@ mixin _$CharacterStore on _CharacterStoreBase, Store {
     return '''
 characters: ${characters},
 favoriteCharacters: ${favoriteCharacters},
-isLoading: ${isLoading}
+isLoading: ${isLoading},
+currentPage: ${currentPage},
+hasMorePages: ${hasMorePages}
     ''';
   }
 }
