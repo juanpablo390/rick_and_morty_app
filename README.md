@@ -18,17 +18,17 @@ Esta capa se encarga de la interacción directa con las fuentes de datos. Está 
 
 - datasources:
 
-- - character_local_data_sources.dart: Maneja la persistencia local de datos (por ejemplo, usando bases de    datos locales como SQLite o SharedPreferences).
+    - character_local_data_sources.dart: Maneja la persistencia local de datos (por ejemplo, usando bases de    datos locales como SQLite o SharedPreferences).
 
-- - character_remote_data_sources.dart: Realiza las llamadas a la API remota para obtener información de personajes.
+    - character_remote_data_sources.dart: Realiza las llamadas a la API remota para obtener información de personajes.
 
 - models:
 
-- - character_model.dart: Define cómo se estructuran los datos que provienen de la API o la base de datos. Es un reflejo de los datos que manejan las fuentes, con métodos como fromJson y toJson para serialización/deserialización.
+    - character_model.dart: Define cómo se estructuran los datos que provienen de la API o la base de datos. Es un reflejo de los datos que manejan las fuentes, con métodos como fromJson y toJson para serialización/deserialización.
 
 - repositories:
 
-- - character_repository_impl.dart: Implementa las funciones del repositorio definido en el dominio. Actúa como un puente entre las fuentes de datos (datasources) y la capa de dominio.
+    - character_repository_impl.dart: Implementa las funciones del repositorio definido en el dominio. Actúa como un puente entre las fuentes de datos (datasources) y la capa de dominio.
 
 #### Capa de Dominio:
 
@@ -36,18 +36,18 @@ La capa dominio contiene la lógica central de la aplicación, independiente de 
 
 - entities:
 
-- - character.dart: Define las entidades principales de la app, como los personajes. Estas entidades son modelos simplificados, libres de detalles específicos de implementación.
+    - character.dart: Define las entidades principales de la app, como los personajes. Estas entidades son modelos simplificados, libres de detalles específicos de implementación.
 
 - repositories:
 
-- - characters_repository.dart: Es una interfaz que define las operaciones permitidas sobre los datos (p. ej., obtener personajes, agregar favoritos). Es implementada por character_repository_impl.dart en la capa de datos.
+    - characters_repository.dart: Es una interfaz que define las operaciones permitidas sobre los datos (p. ej., obtener personajes, agregar favoritos). Es implementada por character_repository_impl.dart en la capa de datos.
 
 - use_cases:
 
-- - add_to_favorite.dart: Contiene la lógica específica para añadir un personaje a favoritos.
-- - get_all_characters_favorites.dart: Devuelve todos los personajes marcados como favoritos.
-- - get_characters.dart: Se encarga de la lógica para obtener los personajes desde la API o el almacenamiento local.
-- - remove_favorite.dart: Gestiona la eliminación de un personaje de favoritos.
+    - add_to_favorite.dart: Contiene la lógica específica para añadir un personaje a favoritos.
+    - get_all_characters_favorites.dart: Devuelve todos los personajes marcados como favoritos.
+    - get_characters.dart: Se encarga de la lógica para obtener los personajes desde la API o el almacenamiento local.
+    - remove_favorite.dart: Gestiona la eliminación de un personaje de favoritos.
 
 #### Capa de Dominio:
 
@@ -55,28 +55,28 @@ La capa de presentación gestiona la interacción con el usuario y muestra los d
 
 - pages:
 
-- - characters_page.dart: Página principal donde se muestra la lista de personajes.
-- - favorite_characters_page.dart: Página que muestra los personajes marcados como favoritos.
-- - map_page.dart: Página destinada a mostrar un mapa (posiblemente para ubicaciones relacionadas con los personajes).
+    - characters_page.dart: Página principal donde se muestra la lista de personajes.
+    - favorite_characters_page.dart: Página que muestra los personajes marcados como favoritos.
+    - map_page.dart: Página destinada a mostrar un mapa (posiblemente para ubicaciones relacionadas con los personajes).
 
 - store:
 
-- - character_store.dart: Contiene el estado observable de la app (usando MobX). Gestiona las acciones como la carga de personajes y la gestión de favoritos.
-- - character_store.g.dart: Archivo generado automáticamente por MobX para gestionar las anotaciones y la reactividad.
+    - character_store.dart: Contiene el estado observable de la app (usando MobX). Gestiona las acciones como la carga de personajes y la gestión de favoritos.
+    - character_store.g.dart: Archivo generado automáticamente por MobX para gestionar las anotaciones y la reactividad.
 
 - widgets:
 
-- - Probablemente contenga componentes reutilizables de la interfaz, como tarjetas para personajes, botones personalizados, etc.
+    - Probablemente contenga componentes reutilizables de la interfaz, como tarjetas para personajes, botones personalizados, etc.
 
 ### Otros archivos
 
 - service_locator.dart:
 
-- - Este archivo implementa la inyección de dependencias, registrando los servicios y objetos necesarios en la app, como los repositorios, los casos de uso y las fuentes de datos.
+    - Este archivo implementa la inyección de dependencias, registrando los servicios y objetos necesarios en la app, como los repositorios, los casos de uso y las fuentes de datos.
 
 - main.dart:
 
-- - Punto de entrada de la aplicación. Configura el ServiceLocator y establece la primera pantalla (CharactersPage).
+    - Punto de entrada de la aplicación. Configura el ServiceLocator y establece la primera pantalla (CharactersPage).
 
 ### Decisiones Técnicas
 
