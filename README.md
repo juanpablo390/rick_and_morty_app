@@ -53,13 +53,18 @@ La aplicación sigue la Clean Architecture, lo que permite una separación clara
 
 - Clona el repositorio en tu máquina local:
 
-(git clone https://github.com/juanpablo390/rick_and_morty_app.git)
+```javascript
+git clone https://github.com/juanpablo390/rick_and_morty_app.git
 cd rick_and_morty_app
-
+```
 - Instala las dependencias:
 
+```
 flutter pub get
+```
 
--Ejecuta la aplicación en un emulador o dispositivo físico:
+- Ejecuta la aplicación en un emulador o dispositivo físico:
 
+```
 flutter run
+```
