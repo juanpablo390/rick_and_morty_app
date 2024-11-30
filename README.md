@@ -1,7 +1,5 @@
 # rick_and_morty_app
 
-A new Flutter project.
-
 ### Requisitos previos
 
 Asegúrate de tener los siguientes programas instalados:
@@ -14,22 +12,71 @@ Asegúrate de tener los siguientes programas instalados:
 ### Arquitectura
 La aplicación sigue la Clean Architecture, lo que permite una separación clara de responsabilidades y facilita la escalabilidad. La estructura del proyecto está dividida en tres capas principales:
 
-#### Capa de Presentación:
+#### Capa de Datos
 
-- Se encarga de la interfaz de usuario.
-- Se utilizan Widgets y MobX para manejar el estado de la aplicación de forma reactiva.
-- Las pantallas incluyen: CharactersPage, CharacterDetailPage y FavoritesPage.
+Esta capa se encarga de la interacción directa con las fuentes de datos. Está subdividida en:
+
+- datasources:
+
+- - character_local_data_sources.dart: Maneja la persistencia local de datos (por ejemplo, usando bases de    datos locales como SQLite o SharedPreferences).
+
+- - character_remote_data_sources.dart: Realiza las llamadas a la API remota para obtener información de personajes.
+
+- models:
+
+- - character_model.dart: Define cómo se estructuran los datos que provienen de la API o la base de datos. Es un reflejo de los datos que manejan las fuentes, con métodos como fromJson y toJson para serialización/deserialización.
+
+- repositories:
+
+- - character_repository_impl.dart: Implementa las funciones del repositorio definido en el dominio. Actúa como un puente entre las fuentes de datos (datasources) y la capa de dominio.
 
 #### Capa de Dominio:
 
-- Contiene los casos de uso que gestionan la lógica de negocio de la aplicación.
-- Incluye: GetCharactersUseCase, AddToFavoriteUseCase, GetAllCharactersFavoritesUseCase, etc.
+La capa dominio contiene la lógica central de la aplicación, independiente de cualquier tecnología específica.
 
-#### Capa de Datos:
+- entities:
 
-- Encargada de la comunicación con la API externa de Rick and Morty.
-- Utiliza un repositorio para abstraer la lógica de acceso a los datos.
-- Realiza peticiones HTTP a la API de Rick and Morty para obtener los personajes.
+- - character.dart: Define las entidades principales de la app, como los personajes. Estas entidades son modelos simplificados, libres de detalles específicos de implementación.
+
+- repositories:
+
+- - characters_repository.dart: Es una interfaz que define las operaciones permitidas sobre los datos (p. ej., obtener personajes, agregar favoritos). Es implementada por character_repository_impl.dart en la capa de datos.
+
+- use_cases:
+
+- - add_to_favorite.dart: Contiene la lógica específica para añadir un personaje a favoritos.
+- - get_all_characters_favorites.dart: Devuelve todos los personajes marcados como favoritos.
+- - get_characters.dart: Se encarga de la lógica para obtener los personajes desde la API o el almacenamiento local.
+- - remove_favorite.dart: Gestiona la eliminación de un personaje de favoritos.
+
+#### Capa de Dominio:
+
+La capa de presentación gestiona la interacción con el usuario y muestra los datos.
+
+- pages:
+
+- - characters_page.dart: Página principal donde se muestra la lista de personajes.
+- - favorite_characters_page.dart: Página que muestra los personajes marcados como favoritos.
+- - map_page.dart: Página destinada a mostrar un mapa (posiblemente para ubicaciones relacionadas con los personajes).
+
+- store:
+
+- - character_store.dart: Contiene el estado observable de la app (usando MobX). Gestiona las acciones como la carga de personajes y la gestión de favoritos.
+- - character_store.g.dart: Archivo generado automáticamente por MobX para gestionar las anotaciones y la reactividad.
+
+- widgets:
+
+- - Probablemente contenga componentes reutilizables de la interfaz, como tarjetas para personajes, botones personalizados, etc.
+
+### Otros archivos
+
+- service_locator.dart:
+
+- - Este archivo implementa la inyección de dependencias, registrando los servicios y objetos necesarios en la app, como los repositorios, los casos de uso y las fuentes de datos.
+
+- main.dart:
+
+- - Punto de entrada de la aplicación. Configura el ServiceLocator y establece la primera pantalla (CharactersPage).
 
 ### Decisiones Técnicas
 
