@@ -2,7 +2,16 @@
 
 A new Flutter project.
 
-## Getting Started
+## Instalación y Ejecución
+
+# Requisitos previos
+Asegúrate de tener los siguientes programas instalados:
+
+Flutter (para compilar la app): Instalación de Flutter
+Dart SDK (automáticamente instalado con Flutter)
+Android Studio o Visual Studio Code (para desarrollar y ejecutar la app)
+Emulador Android o dispositivo físico conectado
+
 
 This project is a starting point for a Flutter application.
 
